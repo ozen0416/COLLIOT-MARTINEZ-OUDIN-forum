@@ -6,3 +6,8 @@ type Topic struct {
 	Content   string
 	PubliDate string
 }
+
+type Auth struct {
+	Email string
+	Pass  string
+}

@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"database/sql"
-	"fmt"
 	"forum/structures"
 	_ "github.com/go-sql-driver/mysql"
 	"html/template"
@@ -30,42 +29,49 @@ func HandleNotFound(files []string, w http.ResponseWriter, _ *http.Request) {
 }
 
 func HandleLogin(files []string) {
-	db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer db.Close()
-
-	results, err := db.Query("SELECT * FROM `topic` ORDER BY topic.publi_date DESC")
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	http.HandleFunc("/login", func(writer http.ResponseWriter, request *http.Request) {
 		if request.URL.Path != "/login" {
 			HandleNotFound(files, writer, request)
 			return
 		}
-		for results.Next() {
-			var content structures.Topic
-			err := results.Scan(&content.Id, &content.CatId, &content.Content, &content.PubliDate)
-			if err != nil {
-				log.Fatal(err)
-			}
-			fmt.Println(content)
+
+		if request.Method != http.MethodPost {
+			f := append(files, "templates/login.html")
+			tmpl := template.Must(template.ParseFiles(f...))
+			tmpl.Execute(writer, nil)
+			return
 		}
 
-		f := append(files, "templates/dua.html")
-		tmpl := template.Must(template.ParseFiles(f...))
-		tmpl.Execute(writer, nil)
+		db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer db.Close()
 
-		//if request.Method != http.MethodPost {
-		//	f := append(files, "templates/login.html")
-		//	tmpl := template.Must(template.ParseFiles(f...))
-		//	tmpl.Execute(w, nil)
-		//	return
-		//}
+		email := request.FormValue("email")
+		pass := request.FormValue("pass")
+
+		var authValue structures.Auth
+
+		err = db.QueryRow("SELECT email, passwd FROM `users` WHERE users.email = ? AND users.passwd = ?", email, pass).Scan(&authValue.Email, &authValue.Pass)
+		if err != nil {
+			f := append(files, "templates/login.html")
+			tmpl := template.Must(template.ParseFiles(f...))
+			tmpl.Execute(writer, "Erreur dans l'e-mail ou le mot de passe")
+			return
+		}
+
+		http.Redirect(writer, request, "/dashboard", 302)
 
 	})
 
+}
+
+func HandleDashboard(files []string) {
+	http.HandleFunc("/dashboard", func(writer http.ResponseWriter, request *http.Request) {
+		f := append(files, "templates/dua.html")
+		tmpl := template.Must(template.ParseFiles(f...))
+		tmpl.Execute(writer, nil)
+		return
+	})
 }

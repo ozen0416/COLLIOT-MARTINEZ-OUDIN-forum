@@ -24,5 +24,6 @@ func main() {
 
 	handlers.HandleIndex(f)
 	handlers.HandleLogin(f)
+	handlers.HandleDashboard(f)
 	http.ListenAndServe(port, nil)
 }

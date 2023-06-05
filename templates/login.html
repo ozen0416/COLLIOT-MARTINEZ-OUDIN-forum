@@ -1,0 +1,10 @@
+{{define "content"}}
+<form method="post" action="/login">
+    <label for="email">E-mail:</label>
+    <input type="text" id="email" name="email">
+    <label for="pass">Mot de passe:</label>
+    <input type="text" id="pass" name="pass">
+    <input type="submit">
+</form>
+<p>{{ . }}</p>
+{{end}}
