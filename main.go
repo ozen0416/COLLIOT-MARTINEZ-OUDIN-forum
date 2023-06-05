@@ -13,7 +13,7 @@ func main() {
 	f := []string{
 		"templates/index.html",
 		"templates/header.html",
-		"templates/footer.html"
+		"templates/footer.html",
 	}
 
 	fmt.Println("(http://localhost:8080)", "Server started on port ", port)
