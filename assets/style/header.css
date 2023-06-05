@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'Josefin';
+    src: url(../font/JosefinSans-VariableFont_wght.ttf);
+}
+
+:root {
+    --var-primary : #85da74;
+    --var-secondary : #f9f3f3;
+    --var-third : #52B69A;
+    --var-hover : #1A759F;
+}
+
+.ctn-logo-header {
+    width: auto;
+    max-height: 100%;
+}
+
+.logo-header {
+    display: block;
+    height: 100%;
+    border: 1px solid transparent;
+    border-radius: 70px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin';
+}
+
+a {
+    text-decoration: none;
+    color: var(--var-secondary);
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    height: 70px;
+}
+
+.ctn-header {
+    position: fixed;
+    background-color: var(--var-primary);
+    width: 100vw;
+}
+
+.btn-insc {
+    display: flex;
+    gap: 100px;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 60px;
+}
+
+.btn-infos {
+    display: flex;
+    gap: 150px;
+    align-items: center;
+    font-size: larger;
+}
+
+.btn {
+    background-color: var(--var-third);
+    border-radius: 10px;
+    justify-content: right;
+    font-size: larger;
+    padding: 10px;
+    transition: 0.4s ease-in-out;
+}
+
+.btn:hover {
+    background-color: var(--var-hover);
+}
+
+.hov {
+    transition: 0.4s ease-in-out;
+}
+
+.hov:hover {
+    color: var(--var-hover);
+}
+
+.space-div {
+    height: 70px;
+}
+
+.return-index {
+    width: 50px;
+}
+
+.clickable {
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    margin: 0 10px;
+}
