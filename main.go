@@ -16,6 +16,10 @@ func main() {
 		"templates/footer.html",
 	}
 
+	// Ajout des fichiers statiques
+	static := http.FileServer(http.Dir("assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets/", static))
+
 	fmt.Println("(http://localhost:8080)", "Server started on port ", port)
 
 	handlers.HandleIndex(f)

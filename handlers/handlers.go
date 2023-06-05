@@ -3,6 +3,7 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
+	"forum/structures"
 	_ "github.com/go-sql-driver/mysql"
 	"html/template"
 	"log"
@@ -46,8 +47,11 @@ func HandleLogin(files []string) {
 			return
 		}
 		for results.Next() {
-			var content int
-			results.Scan(&content)
+			var content structures.Topic
+			err := results.Scan(&content.Id, &content.CatId, &content.Content, &content.PubliDate)
+			if err != nil {
+				log.Fatal(err)
+			}
 			fmt.Println(content)
 		}
 
