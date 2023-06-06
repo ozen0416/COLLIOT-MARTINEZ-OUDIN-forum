@@ -54,7 +54,6 @@ func HandleLogin(files []string) {
 		session, _ := store.Get(request, "cookie-forum-ynov")
 		if request.URL.Path != "/login" {
 			HandleNotFound(files, writer, request)
-			return
 		}
 
 		if request.Method != http.MethodPost {
@@ -62,6 +61,11 @@ func HandleLogin(files []string) {
 			tmpl := template.Must(template.ParseFiles(f...))
 			tmpl.Execute(writer, nil)
 			return
+		}
+
+		// If authenticated
+		if auth, ok := session.Values["authenticated"].(bool); ok && auth {
+			http.Redirect(writer, request, "/dashboard", 302)
 		}
 
 		db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
@@ -97,8 +101,7 @@ func HandleDashboard(files []string) {
 		session, _ := store.Get(request, "cookie-forum-ynov")
 
 		if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
-			HandleNotFound(files, writer, request)
-			return
+			http.Redirect(writer, request, "/login", 302)
 		}
 
 		f := append(files, "templates/dua.html")
