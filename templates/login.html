@@ -1,4 +1,5 @@
 {{define "content"}}
+{{template "header" .}}
 <form method="post" action="/login">
     <label for="email">E-mail:</label>
     <input type="text" id="email" name="email">
@@ -7,4 +8,5 @@
     <input type="submit">
 </form>
 <p>{{ . }}</p>
+{{template "footer" .}}
 {{end}}

@@ -38,7 +38,7 @@ func HandleIndex(files []string) {
 		tmpl.Execute(writer, struct {
 			Id   int
 			Mess string
-		}{Id: id, Mess: "authentifié est mon id est : "})
+		}{Id: id, Mess: "authentifié et mon id est : "})
 	})
 }
 
@@ -57,15 +57,15 @@ func HandleLogin(files []string) {
 		}
 
 		if request.Method != http.MethodPost {
+			// If authenticated
+			if auth, ok := session.Values["authenticated"].(bool); ok && auth {
+				http.Redirect(writer, request, "/dashboard", 302)
+			}
+
 			f := append(files, "templates/login.html")
 			tmpl := template.Must(template.ParseFiles(f...))
 			tmpl.Execute(writer, nil)
 			return
-		}
-
-		// If authenticated
-		if auth, ok := session.Values["authenticated"].(bool); ok && auth {
-			http.Redirect(writer, request, "/dashboard", 302)
 		}
 
 		db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
