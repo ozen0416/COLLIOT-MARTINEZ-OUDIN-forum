@@ -26,5 +26,6 @@ func main() {
 	handlers.HandleLogin(f)
 	handlers.HandlerLogout()
 	handlers.HandleDashboard(f)
+	handlers.HandlerSignIn(f)
 	http.ListenAndServe(port, nil)
 }
