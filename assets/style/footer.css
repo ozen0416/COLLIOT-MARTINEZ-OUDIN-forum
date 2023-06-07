@@ -1,8 +1,7 @@
 .ctn-footer {
     position: absolute;
     bottom: 0;
-    background-color: black;
-    border: 1px solid black;
+    background-color: var(--primary);
     width: 100vw;
     height: 150px;
 }
@@ -16,9 +15,26 @@
 .test1 {
     display: flex;
     gap: 50px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .test2 {
     display: flex;
     gap: 50px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-twi {
+    height: 15px;
+    margin-left: 15px;
+}
+
+.hvr:hover {
+    transition: 0.3s ease;
+    color: var(--third);
 }

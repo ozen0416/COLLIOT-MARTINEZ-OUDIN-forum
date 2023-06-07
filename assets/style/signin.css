@@ -1,0 +1,45 @@
+.ctn-signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    border-radius: 50px;
+    height: 500px;
+    margin-top: 100px;
+    margin-left: 500px;
+    margin-right: 500px;
+    margin-bottom: 100px;
+}
+
+.form-signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#username {
+    text-align: center;
+    width: 200px;
+    margin: 10px;
+    padding: 5px;
+}
+
+#bdate {
+    text-align: center;
+    width: 100px;
+    padding: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#submit {
+    border-radius: 30px;
+    width: 80px;
+    color: var(--hover);
+    margin-top: 10px;
+}
+
+#submit:hover {
+    opacity:0.8;
+    transition: 0.3s;
+}

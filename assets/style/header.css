@@ -3,13 +3,6 @@
     src: url(../font/JosefinSans-VariableFont_wght.ttf);
 }
 
-:root {
-    --var-primary : #85da74;
-    --var-secondary : #f9f3f3;
-    --var-third : #52B69A;
-    --var-hover : #1A759F;
-}
-
 .ctn-logo-header {
     width: auto;
     max-height: 100%;
@@ -30,7 +23,7 @@
 
 a {
     text-decoration: none;
-    color: var(--var-secondary);
+    color: var(--secondary);
 }
 
 header {
@@ -41,7 +34,7 @@ header {
 
 .ctn-header {
     position: fixed;
-    background-color: var(--var-primary);
+    background-color: var(--primary);
     width: 100vw;
 }
 
@@ -61,7 +54,7 @@ header {
 }
 
 .btn {
-    background-color: var(--var-third);
+    background-color: var(--third);
     border-radius: 10px;
     justify-content: right;
     font-size: larger;
@@ -70,7 +63,7 @@ header {
 }
 
 .btn:hover {
-    background-color: var(--var-hover);
+    background-color: var(--hover);
 }
 
 .hov {
@@ -78,7 +71,7 @@ header {
 }
 
 .hov:hover {
-    color: var(--var-hover);
+    color: var(--hover);
 }
 
 .space-div {

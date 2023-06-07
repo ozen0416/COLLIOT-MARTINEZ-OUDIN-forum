@@ -1,16 +1,17 @@
 {{define "content"}}
 {{template "header" .}}
-<form method="post" action="/signin">
-  <label for="username">Pseudo:</label>
-  <input type="text" id="username" name="username">
-  <label for="email">E-mail:</label>
-  <input type="text" id="email" name="email">
-  <label for="pass">Mot de passe:</label>
-  <input type="text" id="pass" name="pass">
-  <label for="bdate">Date de naissance:</label>
+<div class="ctn-signin">
+  <form method="post" action="/signin" class="form-signin">
+  <label for="username">Pseudo :</label>
+  <input type="text" id="username" name="username" placeholder="Entrez votre pseudo">
+  <label for="email">E-mail :</label>
+  <input type="text" id="email" name="email" placeholder="Entrez votre email">
+  <label for="pass">Mot de passe :</label>
+  <input type="text" id="pass" name="pass" placeholder="Entrez votre mot de passe">
+  <label for="bdate">Date de naissance :</label>
   <input type="date" id="bdate" name="bdate">
-  <input type="submit">
-</form>
+  <input type="submit" id="submit">
+  </form>
+</div>
 {{.}}
-{{template "footer"}}
 {{end}}
