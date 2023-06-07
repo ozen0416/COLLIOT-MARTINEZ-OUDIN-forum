@@ -1,0 +1,14 @@
+.notfound {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.err {
+    font-size: 100px;
+}
+
+.notfound:hover {
+    cursor: wait;
+}

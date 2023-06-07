@@ -1,40 +1,75 @@
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .ctn-footer {
     position: absolute;
     bottom: 0;
     background-color: var(--primary);
     width: 100vw;
     height: 150px;
+
 }
 
-.column-footer {
+.left-footer {
     display: flex;
     align-items: center;
-    flex-direction: column;
+}
+
+.right-footer {
+    display: flex;
+    align-items: center;
 }
 
 .test1 {
     display: flex;
-    gap: 50px;
+    gap: 30px;
     height: 70px;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-
+    align-items: flex-end;
+    width: 100%;
+    padding: 50px;
 }
 
 .test2 {
     display: flex;
-    gap: 50px;
+    gap: 30px;
     height: 70px;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    width: 100%;
+    
 }
 
-.logo-twi {
+.logo {
     height: 15px;
     margin-left: 15px;
 }
 
 .hvr:hover {
     transition: 0.3s ease;
-    color: var(--third);
+    color: var(--hover);
+}
+
+.spo:hover {
+    color: #0d7632;
+}
+
+.inst:hover {
+    color: rgb(228, 71, 228);
+}
+
+.you:hover {
+    color: rgb(195, 49, 49);
+}
+
+.mentions:hover {
+    color: black;
+}
+
+.sound:hover {
+    color:rgb(237, 198, 198);
 }

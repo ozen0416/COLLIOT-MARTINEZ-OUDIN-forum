@@ -4,12 +4,13 @@ import (
 	"crypto/rand"
 	"database/sql"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/gorilla/sessions"
-	_ "github.com/gorilla/sessions"
 	"html/template"
 	"log"
 	"net/http"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/sessions"
+	_ "github.com/gorilla/sessions"
 )
 
 var (
