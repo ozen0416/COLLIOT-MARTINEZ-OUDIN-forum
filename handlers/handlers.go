@@ -5,6 +5,7 @@ import (
 	"forum/handlers/connection"
 	not_found "forum/handlers/not-found"
 	"forum/session"
+	"forum/structures"
 	"html/template"
 	"net/http"
 
@@ -24,6 +25,7 @@ func OneHandlerToHandleThemAll() {
 	connection.HandleLogin(f)
 	connection.HandlerLogout()
 	connection.HandlerSignIn(f)
+	HandleTopic(f)
 }
 
 func HandleIndex(files []string) {
@@ -64,6 +66,15 @@ func HandleDashboard(files []string) {
 		f := append(files, "templates/dua.html")
 		tmpl := template.Must(template.ParseFiles(f...))
 		tmpl.Execute(writer, nil)
+		return
+	})
+}
+
+func HandleTopic(files []string) {
+	http.HandleFunc("/topic", func(writer http.ResponseWriter, request *http.Request) {
+		f := append(files, "templates/topics.html")
+		tmpl := template.Must(template.ParseFiles(f...))
+		tmpl.Execute(writer, structures.GetTopicsByTime())
 		return
 	})
 }
