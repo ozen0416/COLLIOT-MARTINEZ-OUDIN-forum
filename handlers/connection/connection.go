@@ -1,13 +1,12 @@
 package connection
 
 import (
-	"database/sql"
 	"fmt"
 	"forum/handlers/not-found"
 	"forum/secret"
 	"forum/session"
+	"forum/structures"
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -32,23 +31,11 @@ func HandleLogin(files []string) {
 			return
 		}
 
-		db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer db.Close()
-
 		email := request.FormValue("email")
 		pass := request.FormValue("pass")
 
-		var hashPass string
-		var idUser int
-		err = db.QueryRow("SELECT passwd, id FROM `users` WHERE users.email = ?", email).Scan(&hashPass, &idUser)
-		if err != nil {
-			fmt.Println("Login: ", err)
-		}
 		//Check if password is good
-		if !secret.CheckPasswordHash(pass, hashPass) {
+		if !structures.Login(email, pass) {
 			f := append(files, "templates/login.html")
 			tmpl := template.Must(template.ParseFiles(f...))
 			tmpl.Execute(writer, "Erreur dans l'e-mail ou le mot de passe !")
@@ -57,7 +44,6 @@ func HandleLogin(files []string) {
 
 		fmt.Println("Logged in")
 		_session.Values["authenticated"] = true
-		_session.Values["id-user"] = idUser
 		_session.Save(request, writer)
 		http.Redirect(writer, request, "/dashboard", 302)
 	})
@@ -93,27 +79,22 @@ func HandlerSignIn(files []string) {
 			return
 		}
 
-		// Connecting to BD
-		db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/forum")
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer db.Close()
-
 		// Fetching form values
-		email := request.FormValue("email")
 		pass := request.FormValue("pass")
-		username := request.FormValue("username")
-		date := request.FormValue("bdate")
-
 		hash, err := secret.HashPassword(pass)
 		if err != nil {
 			fmt.Println(err)
 		}
+		UserToSign := structures.User{
+			Email:     request.FormValue("email"),
+			Username:  request.FormValue("username"),
+			Pass:      hash,
+			BirthDate: request.FormValue("bdate"),
+		}
 
-		_, err = db.Query("INSERT INTO `users`(`nickname`, `email`, `Date_Birth`, `passwd`) VALUES (?,?,?,?)", username, email, date, hash)
+		_, err = structures.SignUser(UserToSign)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Println("Sign In: ", err)
 			f := append(files, "templates/sign-in.html")
 			tmpl := template.Must(template.ParseFiles(f...))
 			tmpl.Execute(writer, "L'e-mail ou le pseudo sont déjà utilisés !")

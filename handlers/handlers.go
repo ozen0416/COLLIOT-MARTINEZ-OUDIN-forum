@@ -43,11 +43,7 @@ func HandleIndex(files []string) {
 			return
 		}
 		// If authenticated
-		id := _session.Values["id-user"].(int)
-		tmpl.Execute(writer, struct {
-			Id   int
-			Mess string
-		}{Id: id, Mess: "authentifié et mon id est : "})
+		tmpl.Execute(writer, nil)
 	})
 }
 
@@ -61,7 +57,7 @@ func HandleDashboard(files []string) {
 
 		//if not logged
 		if auth, ok := _session.Values["authenticated"].(bool); !ok || !auth {
-			fmt.Println("auth: ", auth, " ok ?; ", ok)
+			fmt.Println("Dashboard: auth: ", auth, " ok ?; ", ok)
 			http.Redirect(writer, request, "/login", 302)
 		}
 
