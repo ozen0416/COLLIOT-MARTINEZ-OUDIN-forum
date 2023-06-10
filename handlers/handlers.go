@@ -8,6 +8,7 @@ import (
 	"forum/structures"
 	"html/template"
 	"net/http"
+	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/gorilla/sessions"
@@ -72,6 +73,19 @@ func HandleDashboard(files []string) {
 
 func HandleTopic(files []string) {
 	http.HandleFunc("/topic", func(writer http.ResponseWriter, request *http.Request) {
+		//_session, _ := session.Get(request)
+
+		if request.URL.Path != "/topic" {
+			not_found.HandleNotFound(files, writer, request)
+		}
+
+		idTopic := strings.TrimPrefix(request.URL.RequestURI(), "/topic?id=")
+		if idTopic != "/topic" {
+			f := append(files, "templates/topic-unique-temp.html")
+			tmpl := template.Must(template.ParseFiles(f...))
+			tmpl.Execute(writer, structures.GetMessByTopicId(idTopic))
+			return
+		}
 		f := append(files, "templates/topics.html")
 		tmpl := template.Must(template.ParseFiles(f...))
 		tmpl.Execute(writer, structures.GetTopicsByTime())

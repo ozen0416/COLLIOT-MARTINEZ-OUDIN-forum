@@ -27,6 +27,5 @@ func GetTopicsByTime() []Topic {
 		}
 		topicArray = append(topicArray, topicToAppend)
 	}
-
 	return topicArray
 }

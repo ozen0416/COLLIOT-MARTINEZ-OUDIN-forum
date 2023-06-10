@@ -1,0 +1,10 @@
+{{define "content"}}
+{{template "header" .}}
+{{range . }}
+<div>
+    <h1>{{.PubliDate}}</h1>
+    <h2>{{.Content}}</h2>
+</div>
+{{end}}
+{{template "footer" .}}
+{{end}}
