@@ -17,13 +17,6 @@
     align-items: center;
 }
 
-#username {
-    text-align: center;
-    width: 200px;
-    margin: 10px;
-    padding: 5px;
-}
-
 #bdate {
     text-align: center;
     width: 100px;

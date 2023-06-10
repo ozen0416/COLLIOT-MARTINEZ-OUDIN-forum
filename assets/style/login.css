@@ -26,14 +26,7 @@
     align-items: center;
 }
 
-#email {
-    width: 200px;
-    text-align: center;
-    padding: 5px;
-    margin: 10px;
-}
-
-#pass  {
+#sign {
     width: 200px;
     text-align: center;
     padding: 5px;
