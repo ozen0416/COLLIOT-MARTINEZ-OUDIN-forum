@@ -3,6 +3,7 @@ package handlers
 import (
 	"crypto/rand"
 	"forum/handlers/connection"
+	not_found "forum/handlers/not-found"
 	"html/template"
 	"net/http"
 
@@ -36,7 +37,7 @@ func HandleIndex(files []string) {
 		session, _ := store.Get(request, "cookie-forum-ynov")
 
 		if request.URL.Path != "/" {
-			HandleNotFound(files, writer, request)
+			not_found.HandleNotFound(files, writer, request)
 			return
 		}
 		f := append(files, "templates/landing-page.html")
@@ -56,19 +57,12 @@ func HandleIndex(files []string) {
 	})
 }
 
-func HandleNotFound(files []string, writer http.ResponseWriter, _ *http.Request) {
-	writer.WriteHeader(404)
-	f := append(files, "templates/not-found.html")
-	tmpl := template.Must(template.ParseFiles(f...))
-	tmpl.Execute(writer, nil)
-}
-
 func HandleDashboard(files []string) {
 	http.HandleFunc("/dashboard", func(writer http.ResponseWriter, request *http.Request) {
 		session, _ := store.Get(request, "cookie-forum-ynov")
 
 		if request.URL.Path != "/dashboard" {
-			HandleNotFound(files, writer, request)
+			not_found.HandleNotFound(files, writer, request)
 		}
 
 		//if not logged
