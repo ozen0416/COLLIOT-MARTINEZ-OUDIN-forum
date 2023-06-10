@@ -1,21 +1,15 @@
 package handlers
 
 import (
-	"crypto/rand"
+	"fmt"
 	"forum/handlers/connection"
 	not_found "forum/handlers/not-found"
+	"forum/session"
 	"html/template"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/gorilla/sessions"
 	_ "github.com/gorilla/sessions"
-)
-
-var (
-	key   = make([]byte, 64)
-	_, _  = rand.Read(key)
-	store = sessions.NewCookieStore(key)
 )
 
 func OneHandlerToHandleThemAll() {
@@ -34,7 +28,7 @@ func OneHandlerToHandleThemAll() {
 
 func HandleIndex(files []string) {
 	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		session, _ := store.Get(request, "cookie-forum-ynov")
+		_session, _ := session.Get(request)
 
 		if request.URL.Path != "/" {
 			not_found.HandleNotFound(files, writer, request)
@@ -44,12 +38,12 @@ func HandleIndex(files []string) {
 		tmpl := template.Must(template.ParseFiles(f...))
 
 		// If not authenticated
-		if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		if auth, ok := _session.Values["authenticated"].(bool); !ok || !auth {
 			tmpl.Execute(writer, nil)
 			return
 		}
 		// If authenticated
-		id := session.Values["id-user"].(int)
+		id := _session.Values["id-user"].(int)
 		tmpl.Execute(writer, struct {
 			Id   int
 			Mess string
@@ -59,14 +53,15 @@ func HandleIndex(files []string) {
 
 func HandleDashboard(files []string) {
 	http.HandleFunc("/dashboard", func(writer http.ResponseWriter, request *http.Request) {
-		session, _ := store.Get(request, "cookie-forum-ynov")
+		_session, _ := session.Get(request)
 
 		if request.URL.Path != "/dashboard" {
 			not_found.HandleNotFound(files, writer, request)
 		}
 
 		//if not logged
-		if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		if auth, ok := _session.Values["authenticated"].(bool); !ok || !auth {
+			fmt.Println("auth: ", auth, " ok ?; ", ok)
 			http.Redirect(writer, request, "/login", 302)
 		}
 
