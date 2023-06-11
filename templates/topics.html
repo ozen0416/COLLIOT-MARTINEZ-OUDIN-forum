@@ -2,8 +2,9 @@
     {{range . }}
     <div class="list-item">
         <a href="/topic?id={{.Id}}">
-            <h1>{{ .PubliDate }}</h1>
-            <p>{{ .Content }}</p>
+            <h1>{{ .Content }}</h1>
+            <h2>{{ .Author.Username }}</h2>
+            <p>{{ .PubliDate }}</p>
         </a>
     </div>
     {{end}}
