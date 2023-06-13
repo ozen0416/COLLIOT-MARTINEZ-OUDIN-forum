@@ -9,7 +9,7 @@ footer {
     background-color: var(--primary);
     width: 100vw;
     height: 150px;
-
+    box-shadow: 5px -5px 5px grey;
 }
 
 .left-footer {

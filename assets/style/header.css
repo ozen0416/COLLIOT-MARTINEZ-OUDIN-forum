@@ -24,6 +24,7 @@ header {
     position: fixed;
     background-color: var(--primary);
     width: 100vw;
+    box-shadow: 5px 5px 5px grey;
 }
 
 .btn-insc {
