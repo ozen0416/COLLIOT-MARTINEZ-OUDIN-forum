@@ -1,6 +1,23 @@
 :root {
-    --primary : #85da74;
-    --secondary : #f9f3f3;
-    --third : #52B69A;
-    --hover : #1A759F;
+    --primary : #FF5D8F;
+    --secondary : #FFC8DD;
+    --third : #A2D2FF;
+    --hover : #FF97B7;
+}
+
+@font-face {
+    font-family: 'Josefin';
+    src: url(../font/JosefinSans-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: 'Vibes';
+    src: url(../font/GreatVibes-Regular.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin';
 }

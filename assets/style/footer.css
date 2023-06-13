@@ -22,7 +22,7 @@ footer {
     align-items: center;
 }
 
-.test1 {
+.left {
     display: flex;
     gap: 30px;
     height: 70px;
@@ -33,7 +33,7 @@ footer {
     padding: 50px;
 }
 
-.test2 {
+.right {
     display: flex;
     gap: 30px;
     height: 70px;
@@ -55,15 +55,19 @@ footer {
 }
 
 .spo:hover {
-    color: #0d7632;
+    color: #15d759;
 }
 
 .inst:hover {
-    color: rgb(228, 71, 228);
+    color: rgb(199, 11, 199);
 }
 
 .you:hover {
-    color: rgb(195, 49, 49);
+    color: rgb(225, 11, 11);
+}
+
+.twi:hover {
+    color: rgb(0, 0, 255);
 }
 
 .mentions:hover {
@@ -71,5 +75,5 @@ footer {
 }
 
 .sound:hover {
-    color:rgb(237, 198, 198);
+    color:rgb(248, 244, 244);
 }
