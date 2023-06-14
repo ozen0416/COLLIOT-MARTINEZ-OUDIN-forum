@@ -34,8 +34,10 @@ func HandleLogin(files []string) {
 		email := request.FormValue("email")
 		pass := request.FormValue("pass")
 
-		//Check if password is good
-		if !structures.Login(email, pass) {
+		//Check if password is good + get user id
+		var idUser int
+		var ok bool
+		if idUser, ok = structures.Login(email, pass); ok != true {
 			f := append(files, "templates/login.html")
 			tmpl := template.Must(template.ParseFiles(f...))
 			tmpl.Execute(writer, "Erreur dans l'e-mail ou le mot de passe !")
@@ -44,6 +46,8 @@ func HandleLogin(files []string) {
 
 		fmt.Println("Logged in")
 		_session.Values["authenticated"] = true
+		fmt.Println(idUser)
+		_session.Values["idUser"] = idUser
 		_session.Save(request, writer)
 		http.Redirect(writer, request, "/dashboard", 302)
 	})
@@ -92,7 +96,7 @@ func HandlerSignIn(files []string) {
 			BirthDate: request.FormValue("bdate"),
 		}
 
-		_, err = structures.SignUser(UserToSign)
+		idUser, err := structures.SignUser(UserToSign)
 		if err != nil {
 			fmt.Println("Sign In: ", err)
 			f := append(files, "templates/sign-in.html")
@@ -102,7 +106,20 @@ func HandlerSignIn(files []string) {
 		}
 		fmt.Println("User created")
 		_session.Values["authenticated"] = true
+		_session.Values["idUser"] = idUser
 		_session.Save(request, writer)
 		http.Redirect(writer, request, "/dashboard", 302)
+	})
+}
+
+func DeleteAcc() {
+	http.HandleFunc("/deleteacc", func(writer http.ResponseWriter, request *http.Request) {
+		_session, _ := session.Get(request)
+		_session.Values["authenticated"] = "false"
+		idUser := _session.Values["idUser"]
+		_session.Save(request, writer)
+		structures.DeleteUser(idUser.(int))
+		session.MaxAge(-1)
+		http.Redirect(writer, request, "/", 302)
 	})
 }

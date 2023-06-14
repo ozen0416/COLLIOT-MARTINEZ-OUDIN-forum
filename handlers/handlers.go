@@ -26,6 +26,7 @@ func OneHandlerToHandleThemAll() {
 	connection.HandleLogin(f)
 	connection.HandlerLogout()
 	connection.HandlerSignIn(f)
+	connection.DeleteAcc()
 	HandleTopic(f)
 }
 

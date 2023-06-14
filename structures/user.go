@@ -15,17 +15,29 @@ type User struct {
 	BirthDate string
 }
 
-func SignUser(u User) (*sql.Rows, error) {
+func SignUser(u User) (int, error) {
 	db := database.ReturnDatabase()
-	return db.Query("INSERT INTO `users`(`nickname`, `email`, `Date_Birth`, `passwd`) VALUES (?,?,?,?)", u.Username, u.Email, u.BirthDate, u.Pass)
+	_, err := db.Query("INSERT INTO `users`(`nickname`, `email`, `Date_Birth`, `passwd`) VALUES (?,?,?,?)", u.Username, u.Email, u.BirthDate, u.Pass)
+	var id int
+	_ = db.QueryRow("select id from users where email = ?", u.Email).Scan(&id)
+	return id, err
 }
 
-func Login(email, pass string) bool {
+func Login(email, pass string) (int, bool) {
 	db := database.ReturnDatabase()
 	var hashPass string
-	err := db.QueryRow("SELECT passwd FROM `users` WHERE users.email = ?", email).Scan(&hashPass)
-	if err != nil {
-		fmt.Println("Login: ", err)
+	var idUser int
+	err := db.QueryRow("SELECT id, passwd FROM `users` WHERE users.email = ?", email).Scan(&idUser, &hashPass)
+	if err == sql.ErrNoRows {
+		return 0, false
 	}
-	return secret.CheckPasswordHash(pass, hashPass)
+	return idUser, secret.CheckPasswordHash(pass, hashPass)
+}
+
+func DeleteUser(id int) {
+	db := database.ReturnDatabase()
+	_, err := db.Exec("delete from users where id = ?", id)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
