@@ -1,14 +1,20 @@
 {{define "content"}}
 {{template "header" .}}
-<div>
-    <h1>{{(index . 0).Topic.Content}}</h1>
-    <h2>{{(index . 0).Topic.Author.Username}}</h2>
+<div class="ctn-intopic">
+    <div class="topic-message">
+        <h1>{{(index . 0).Topic.Content}}</h1>
+        <h2>{{(index . 0).Topic.Author.Username}}</h2>
+    </div>
 </div>
-{{range . }}
-<div>
-    <h2>{{.Content}}</h2>
-    <h3>{{.Author.Username}}</h3>
+  {{range . }}
+<div class="ctn-intopic">
+    <div class="topic-message">
+        <h2>{{.Content}}</h2>
+        <h3>{{.Author.Username}}</h3>
+    </div>
 </div>
+    
+
 {{end}}
 {{template "footer" .}}
 {{end}}

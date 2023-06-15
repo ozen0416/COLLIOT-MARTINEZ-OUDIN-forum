@@ -1,11 +1,16 @@
 {{define "content"}}
-    {{range . }}
+{{template "header" .}}
+{{range . }}
+<div class="ctn-topics">
     <div class="list-item">
         <a href="/topic?id={{.Id}}">
-            <h1>{{ .Content }}</h1>
-            <h2>{{ .Author.Username }}</h2>
-            <p>{{ .PubliDate }}</p>
+            <h1 >{{ .Content }}</h1>
+            <h2 class="content">{{ .Author.Username }}</h2>
+            <p class="content">{{ .PubliDate }}</p>
         </a>
     </div>
-    {{end}}
+</div>
+
+{{end}}
+{{template "footer" .}}
 {{end}}

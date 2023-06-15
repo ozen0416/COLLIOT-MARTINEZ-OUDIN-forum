@@ -1,0 +1,13 @@
+.ctn-topics {
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.content {
+    text-align: center;
+    padding: 5px;
+}
