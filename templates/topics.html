@@ -1,7 +1,20 @@
 {{define "content"}}
 {{template "header" .}}
+<<<<<<< HEAD
 {{range . }}
 <div class="ctn-topics">
+=======
+<div>
+    <form method="post">
+        <label for="content">Topic:</label>
+        <input type="text" name="topic-content" placeholder="Écrivez votre topic">
+        <input type="submit">
+    </form>
+    <p class="error-mess">{{.ErrorMess}}</p>
+</div>
+
+    {{range .Data }}
+>>>>>>> b54f07f761b3a64077c6d76692fd4862dd13603a
     <div class="list-item">
         <a href="/topic?id={{.Id}}">
             <h1 >{{ .Content }}</h1>
