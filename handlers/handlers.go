@@ -8,6 +8,7 @@ import (
 	"forum/structures"
 	"html/template"
 	"net/http"
+	"strconv"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -74,22 +75,49 @@ func HandleDashboard(files []string) {
 
 func HandleTopic(files []string) {
 	http.HandleFunc("/topic", func(writer http.ResponseWriter, request *http.Request) {
-		//_session, _ := session.Get(request)
+		_session, _ := session.Get(request)
+
+		var data structures.Error
 
 		if request.URL.Path != "/topic" {
 			not_found.HandleNotFound(files, writer, request)
 		}
 
 		idTopic := strings.TrimPrefix(request.URL.RequestURI(), "/topic?id=")
+		// True if is on a specific topic
 		if idTopic != "/topic" {
+			if request.Method == http.MethodPost {
+				idTopicConverted, _ := strconv.Atoi(idTopic)
+				// ok is false if user is not logged
+				if idUser, ok := _session.Values["idUser"].(int); ok {
+					mess := structures.Message{
+						Content: request.FormValue("mess-content"),
+						Author: structures.User{
+							Id: idUser,
+						},
+						Topic: structures.Topic{
+							Id: idTopicConverted,
+						},
+					}
+					_, err := structures.SendMess(mess)
+					if err != nil {
+						fmt.Println("Send mess: ", err)
+					}
+				} else {
+					data.ErrorMess = "Vous n'etes pas connecté"
+				}
+			}
+			data.Data = structures.GetMessByTopicId(idTopic)
 			f := append(files, "templates/topic-unique-temp.html")
 			tmpl := template.Must(template.ParseFiles(f...))
-			tmpl.Execute(writer, structures.GetMessByTopicId(idTopic))
+			tmpl.Execute(writer, data)
 			return
 		}
+
+		data.Data = structures.GetTopicsByTime()
 		f := append(files, "templates/topics.html")
 		tmpl := template.Must(template.ParseFiles(f...))
-		tmpl.Execute(writer, structures.GetTopicsByTime())
+		tmpl.Execute(writer, data)
 		return
 	})
 }

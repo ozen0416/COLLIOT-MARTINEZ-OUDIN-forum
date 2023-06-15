@@ -16,11 +16,12 @@ type Message struct {
 
 func SendMess(m Message) (*sql.Rows, error) {
 	db := database.ReturnDatabase()
-	return db.Query("INSERT INTO `message`(`content`, `user_id`, `topic_id`) VALUES (?,?,?)", m.Content, m.Author, m.Topic.Id)
+	return db.Query("INSERT INTO `message`(`content`, `user_id`, `topic_id`) VALUES (?,?,?)", m.Content, m.Author.Id, m.Topic.Id)
 }
 
 func GetMessByTopicId(id string) []Message {
 	db := database.ReturnDatabase()
+	// Get mess + author of mess + topic of mess + author of topic
 	rows, err := db.Query("SELECT message.id_mess, message.content, message.user_id, message.DatePost, message.topic_id, u.nickname, topic.id_user, topic.content, users.nickname from `message` inner join `users` as u on message.user_id = u.id inner join `topic` on message.topic_id = topic.id inner join `users` on topic.id_user = users.id  where topic_id = ? order by DatePost DESC", id)
 	if err != nil {
 		fmt.Println("GetMessByTopicId: ", err)
