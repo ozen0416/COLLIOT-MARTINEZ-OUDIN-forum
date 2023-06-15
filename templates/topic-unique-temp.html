@@ -2,19 +2,9 @@
 {{template "header" .}}
 <div class="ctn-intopic">
     <div class="topic-message">
-        <h1>{{(index . 0).Topic.Content}}</h1>
-        <h2>{{(index . 0).Topic.Author.Username}}</h2>
+        <h1>{{(index .Data 0).Topic.Content}}</h1>
+        <h2>{{(index .Data 0).Topic.Author.Username}}</h2>
     </div>
-</div>
-  {{range . }}
-<div class="ctn-intopic">
-    <div class="topic-message">
-        <h2>{{.Content}}</h2>
-        <h3>{{.Author.Username}}</h3>
-    </div>
-<div>
-    <h1>{{(index .Data 0).Topic.Content}}</h1>
-    <h2>{{(index .Data 0).Topic.Author.Username}}</h2>
 </div>
 <div>
     <form method="post">
@@ -25,12 +15,13 @@
     <p class="error-mess">{{.ErrorMess}}</p>
 </div>
 {{range .Data }}
-<div>
-    <h2>{{.Content}}</h2>
-    <h3>{{.Author.Username}}</h3>
+<div class="ctn-intopic">
+    <div class="topic-message">
+        <h2>{{.Content}}</h2>
+        <h3>{{.Author.Username}}</h3>
+    </div>
 </div>
-    
-
 {{end}}
+
 {{template "footer" .}}
 {{end}}
