@@ -15,13 +15,13 @@ type Topic struct {
 
 func SendTopic(t Topic) error {
 	db := database.ReturnDatabase()
-	_, err := db.Query("insert into `topic`(`content`, `categorie_id`, `id_user`) values (?,?,?)", t.Content, t.CatId, t.Author.Id)
+	_, err := db.Query("insert into `topic`(`content`, `id_category`, `id_user`) values (?,?,?)", t.Content, t.CatId, t.Author.Id)
 	if err != nil {
 		fmt.Println("Insert Topic: ", err)
 	}
 	var idTopic int
-	_ = db.QueryRow("select id from topic where content = ? and id_user = ?", t.Content, t.Author.Id).Scan(&idTopic)
-	_, err = db.Exec("insert into `message` (content, user_id, topic_id) VALUES (?, ?, ?)", t.Content, t.Author.Id, idTopic)
+	_ = db.QueryRow("select id_topic from topic where content = ? and id_user = ?", t.Content, t.Author.Id).Scan(&idTopic)
+	_, err = db.Exec("insert into `message` (content, id_user, id_topic) VALUES (?, ?, ?)", t.Content, t.Author.Id, idTopic)
 	if err != nil {
 		fmt.Println("Insert first mess of topic: ", err)
 	}
@@ -30,7 +30,7 @@ func SendTopic(t Topic) error {
 
 func GetTopicsByTime() []Topic {
 	db := database.ReturnDatabase()
-	rows, err := db.Query("select topic.id, topic.content, topic.publi_date, users.id, users.nickname from `topic` inner join `users` on topic.id_user = users.id order by topic.publi_date DESC")
+	rows, err := db.Query("select topic.id_topic, topic.content, topic.publication_date, users.id_user, users.username from `topic` inner join `users` on topic.id_user = users.id_user order by topic.publication_date DESC")
 	if err != nil {
 		fmt.Println("Login: ", err)
 	}
@@ -48,7 +48,7 @@ func GetTopicsByTime() []Topic {
 
 func DeleteTopic(id int) {
 	db := database.ReturnDatabase()
-	_, err := db.Exec("delete from topic where id = ?", id)
+	_, err := db.Exec("delete from topic where id_topic = ?", id)
 	if err != nil {
 		fmt.Println("Delete Topic: ", err)
 	}
