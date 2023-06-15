@@ -1,0 +1,15 @@
+.ctn-intopic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.topic-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+   border: 1px solid black; 
+}
