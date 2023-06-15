@@ -30,3 +30,11 @@ func GetTopicsByTime() []Topic {
 	}
 	return topicArray
 }
+
+func DeleteTopic(id int) {
+	db := database.ReturnDatabase()
+	_, err := db.Exec("delete from topic where id = ?", id)
+	if err != nil {
+		fmt.Println("Delete Topic: ", err)
+	}
+}

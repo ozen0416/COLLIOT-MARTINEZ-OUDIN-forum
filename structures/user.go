@@ -38,6 +38,6 @@ func DeleteUser(id int) {
 	db := database.ReturnDatabase()
 	_, err := db.Exec("delete from users where id = ?", id)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Delete User: ", err)
 	}
 }
