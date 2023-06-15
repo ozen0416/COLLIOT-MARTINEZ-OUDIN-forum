@@ -113,6 +113,25 @@ func HandleTopic(files []string) {
 			tmpl.Execute(writer, data)
 			return
 		}
+		// Executes if user is on the /topic route
+		if request.Method == http.MethodPost {
+			if idUser, ok := _session.Values["idUser"].(int); ok {
+				topic := structures.Topic{
+					Content: request.FormValue("topic-content"),
+					CatId:   1,
+					Author: structures.User{
+						Id: idUser,
+					},
+				}
+
+				err := structures.SendTopic(topic)
+				if err != nil {
+					fmt.Println("Send topic: ", err)
+				}
+			} else {
+				data.ErrorMess = "Vous n'etes pas connecté"
+			}
+		}
 
 		data.Data = structures.GetTopicsByTime()
 		f := append(files, "templates/topics.html")

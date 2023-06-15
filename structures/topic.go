@@ -13,6 +13,21 @@ type Topic struct {
 	Author    User
 }
 
+func SendTopic(t Topic) error {
+	db := database.ReturnDatabase()
+	_, err := db.Query("insert into `topic`(`content`, `categorie_id`, `id_user`) values (?,?,?)", t.Content, t.CatId, t.Author.Id)
+	if err != nil {
+		fmt.Println("Insert Topic: ", err)
+	}
+	var idTopic int
+	_ = db.QueryRow("select id from topic where content = ? and id_user = ?", t.Content, t.Author.Id).Scan(&idTopic)
+	_, err = db.Exec("insert into `message` (content, user_id, topic_id) VALUES (?, ?, ?)", t.Content, t.Author.Id, idTopic)
+	if err != nil {
+		fmt.Println("Insert first mess of topic: ", err)
+	}
+	return err
+}
+
 func GetTopicsByTime() []Topic {
 	db := database.ReturnDatabase()
 	rows, err := db.Query("select topic.id, topic.content, topic.publi_date, users.id, users.nickname from `topic` inner join `users` on topic.id_user = users.id order by topic.publi_date DESC")

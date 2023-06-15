@@ -1,5 +1,15 @@
 {{define "content"}}
-    {{range . }}
+{{template "header" .}}
+<div>
+    <form method="post">
+        <label for="content">Topic:</label>
+        <input type="text" name="topic-content" placeholder="Écrivez votre topic">
+        <input type="submit">
+    </form>
+    <p class="error-mess">{{.ErrorMess}}</p>
+</div>
+
+    {{range .Data }}
     <div class="list-item">
         <a href="/topic?id={{.Id}}">
             <h1>{{ .Content }}</h1>
