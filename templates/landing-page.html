@@ -1,7 +1,13 @@
 {{define "content"}}
 <body>
   {{template "header" .}}
-  <p>hahaha</p>
+  <div id="popup" class="popup">
+    <div class="popup-content">
+        <h2>Utilisation des cookies</h2>
+        <p>Ce site web utilise des cookies pour améliorer votre expérience. En continuant à naviguer sur le site, vous acceptez l'utilisation des cookies.</p>
+        <button class="popup-button" onclick="accepterCookies()">J'accepte</button>
+    </div>
+</div>
   <p>{{.Mess}}{{.Id}}</p>
   {{template "footer" .}}
 </body>
