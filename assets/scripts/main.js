@@ -18,3 +18,14 @@ function accepterCookies() {
     localStorage.setItem('cookiesAccepted', true);
     document.getElementById('popup').style.display = 'none';
 }
+
+function verifierMotDePasse() {
+    var password = document.getElementById('passwordInput').value;
+    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (passwordRegex.test(password)) {
+        alert("Le mot de passe est conforme !");
+    } else {
+        alert("Le mot de passe n'est pas conforme !");
+    }
+}
