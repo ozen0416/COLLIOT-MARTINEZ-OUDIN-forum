@@ -1,24 +1,27 @@
-function verifierEmail() {
-    var email = document.getElementById('emailInput').value;
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let emailInput = document.querySelector("#emailInput")
+let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (emailRegex.test(email)) {
-        alert("L'adresse email est conforme !");
-    } else {
-        alert("L'adresse email n'est pas conforme !");
+function CheckEmail(e) {
+    let email = e.target.value;
+
+    if (!emailRegex.test(email)) {
+        console.log("L'adresse email n'est pas conforme !");
+        //TODO prevent submission of form
     }
 }
 
-if (!localStorage.getItem('cookiesAccepted')) {
+
+if (localStorage.getItem('cookiesAccepted') == true) {
     document.getElementById('popup').style.display = 'block';
 }
 
 // Fonction appelée lorsque l'utilisateur accepte les cookies
 function accepterCookies() {
-    localStorage.setItem('cookiesAccepted', true);
+    localStorage.setItem('cookiesAccepted', "true");
     document.getElementById('popup').style.display = 'none';
 }
 
+<<<<<<< HEAD
 function verifierMotDePasse() {
     var password = document.getElementById('passwordInput').value;
     var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -29,3 +32,6 @@ function verifierMotDePasse() {
         alert("Le mot de passe n'est pas conforme !");
     }
 }
+=======
+emailInput.addEventListener("change", CheckEmail)
+>>>>>>> 53a63f840df096f0271758412e384463c827f6d7

@@ -29,6 +29,7 @@ func OneHandlerToHandleThemAll() {
 	connection.HandlerSignIn(f)
 	connection.DeleteAcc()
 	HandleTopic(f)
+	HandleMention(f)
 }
 
 func HandleIndex(files []string) {
@@ -138,5 +139,13 @@ func HandleTopic(files []string) {
 		tmpl := template.Must(template.ParseFiles(f...))
 		tmpl.Execute(writer, data)
 		return
+	})
+}
+
+func HandleMention(files []string) {
+	http.HandleFunc("/mentions", func(writer http.ResponseWriter, request *http.Request) {
+		f := append(files, "templates/mentions.html")
+		tmpl := template.Must(template.ParseFiles(f...))
+		tmpl.Execute(writer, nil)
 	})
 }

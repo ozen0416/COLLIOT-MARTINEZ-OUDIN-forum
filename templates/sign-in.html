@@ -3,15 +3,19 @@
 <div class="ctn-signin">
   <form method="post" action="/signin" class="form-signin">
   <label for="username">Pseudo :</label>
-  <input type="text" id="sign" name="username" placeholder="Entrez votre pseudo">
+  <input type="text" class="sign" name="username" placeholder="Entrez votre pseudo">
   <label for="email">E-mail :</label>
-  <input type="text" id="sign emailInput" name="email" class="root" placeholder="Entrez votre email">
+  <input type="text"  id="emailInput" name="email" class="root sign" placeholder="Entrez votre email">
   <label for="pass">Mot de passe :</label>
+<<<<<<< HEAD
   <input type="password" id="sign passwordInput" name="pass" placeholder="Entrez votre mot de passe">
+=======
+  <input type="text" class="sign" name="pass" placeholder="Entrez votre mot de passe">
+>>>>>>> 53a63f840df096f0271758412e384463c827f6d7
   <label for="bdate">Date de naissance :</label>
   <input type="date" id="bdate" name="bdate">
-  <input type="submit" id="submit">
+  <input type="submit" id="submit" onsubmit="CheckSubmit">
   </form>
 </div>
-{{.}}
+<p class="error-mess">{{.}}</p>
 {{end}}
