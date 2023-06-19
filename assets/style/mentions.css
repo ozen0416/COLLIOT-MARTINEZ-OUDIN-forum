@@ -1,0 +1,12 @@
+.mentions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    text-align: center;
+}
+
+.categorie {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}

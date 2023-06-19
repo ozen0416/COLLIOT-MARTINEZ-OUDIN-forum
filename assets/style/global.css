@@ -21,3 +21,16 @@
     box-sizing: border-box;
     font-family: 'Josefin';
 }
+
+.main-page  {
+    text-align: center;
+    padding-top: 250px;
+}
+
+.main-title {
+    padding-bottom: 10px;
+}
+
+.information {
+    text-decoration:dashed ;
+}

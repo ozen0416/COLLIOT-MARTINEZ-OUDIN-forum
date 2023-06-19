@@ -1,12 +1,24 @@
 {{define "content"}}
-  {{template "header" .}}
-  <div id="popup" class="popup">
-    <div class="popup-content">
-        <h2>Utilisation des cookies</h2>
-        <p>Ce site web utilise des cookies pour améliorer votre expérience. En continuant à naviguer sur le site, vous acceptez l'utilisation des cookies.</p>
-        <button class="popup-button" onclick="accepterCookies()">J'accepte</button>
-    </div>
+{{template "header" .}}
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h2>Utilisation des cookies</h2>
+    <p>Ce site web utilise des cookies pour améliorer votre expérience. En continuant à naviguer sur le site, vous
+      acceptez l'utilisation des cookies.</p>
+    <button class="popup-button" onclick="accepterCookies()">J'accepte</button>
+  </div>
 </div>
-  <p>{{.Mess}}{{.Id}}</p>
-  {{template "footer" .}}
+<div class="main-page">
+  <div class="main-title">
+    <h1>Bienvenue sur Dua Lipa Fan Club</h1>
+  </div>
+  <div class="information">
+    <p>Ici vous vous trouvez sur un forum portant sur l'artiste Dua Lipa, l'étoile montante féminine de ces dernières années.</p>
+  <p>Pour continuer il vous faut seulement créer un compte (ou vous connecter) pour ensuite parler de tout ce qu'il vous chante à propos de Dua Lipa</p>
+  </div>
+  
+</div>
+
+<p>{{.Mess}}{{.Id}}</p>
+{{template "footer" .}}
 {{end}}

@@ -4,8 +4,8 @@ ul, li {
 
 .popup {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 75%;
+    left: 80%;
     transform: translate(-50%, -50%);
     background-color: #f5f5f5;
     padding: 20px;
