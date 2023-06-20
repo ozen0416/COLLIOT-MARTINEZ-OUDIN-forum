@@ -33,7 +33,7 @@ dans l'URL sur laquelle ce client s'y trouve. Nous utilisons les packages `net/h
 Le serveur Go permet aussi de faire des requêtes à notre base de données, ce qui nous permet de stocker les messages, 
 les utilisateurs, les topic, etc. Elle nous permet également d'identifier les utilisateurs du site.
 
-### Vie privé
+### Vie privée
 
 Le forum utilise des cookies pour son bon fonctionnement, mais aucunes données personnelles ne sont stockées pour des raisons
 autres que techniques.
