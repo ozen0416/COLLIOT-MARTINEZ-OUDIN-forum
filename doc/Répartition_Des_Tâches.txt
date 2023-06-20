@@ -1,0 +1,18 @@
+Comme expliqué sur la diapo, l'intégralité du back a été fait par Théo et le reste par Enzo.
+
+Théo :
+    Routing des pages,
+    gestion de la BDD,
+    connexion entre Go et MySQL,
+    chiffrement des mots de passes,
+    gestion des cookies,
+    création des structures necessaries
+
+Enzo :
+    HTML et CSS,
+    JavaScript,
+    header,
+    footer,
+    texte sur les pages
+
+En cas de doute merci de se référer aux commits du Github
