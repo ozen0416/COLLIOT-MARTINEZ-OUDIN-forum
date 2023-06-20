@@ -17,9 +17,15 @@ Des technologies que nous avions déjà utilisé à la seule exception du MySQL.
 
 Notre forum à nous porte sur le thème de Dua Lipa et de son fan club. Car qui ne voudrait pas un forum sur Dua Lipa ?
 
+## Fonctionnement du Forum
+
+À l'arrivée sur le forum vous êtes accueilli par un message de bienvenue et d'explication.
+Vous pouvez vous connecter ou aller consulter les topics et leurs messages.
+Pour écrire il vous faut créer un compte ou vous connecter.
+
 ## Technologies
 
-### Fonctionnement
+### Fonctionnement technique
 
 Ce forum fonction grâce à notre serveur Go qui s'occupe de distribuer les pages HTML à un client selon la route
 dans l'URL sur laquelle ce client s'y trouve. Nous utilisons les packages `net/http` et `html/tempplate` pour cela.
